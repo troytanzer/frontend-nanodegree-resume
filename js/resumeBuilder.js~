@@ -1,6 +1,0 @@
-var formattedName = HTMLheaderName.replace("%data%","Troy Tanzer");
-var formattedRole = HTMLheaderRole.replace("%data%","Code Monkey");
-$("#main").prepend(formattedRole);
-$("#main").prepend(formattedName);
-var mystring = "audacity";
-console.log("U"+ mystring.slice(2));
