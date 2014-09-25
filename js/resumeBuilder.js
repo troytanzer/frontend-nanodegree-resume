@@ -19,7 +19,7 @@ var work = {"jobs":[
     }
 ]}
 
-}
+
 var projects = {"projects":[
     {"title":"Sustaining engineering at AMD",
      "dates":"1999-2001",
@@ -91,3 +91,49 @@ var education= {"schools":[
 	 "url":"http://udacity.com"
 	}]
 }
+$("#main").append(HTMLheaderName.replace("%data%",bio.name));
+if (bio.skills.length > 0) {
+    $("#header").append(HTMLskillsStart);
+    for (skillno in bio.skills) {
+	$("#skills").append(HTMLskills.replace("%data%",bio.skills[skillno]));
+    }
+}
+function displayWork() {
+    $("#workExperience").append(HTMLworkStart);
+    for (job in work.jobs) {
+	var formattedJobs = "";
+	formattedJobs  = formattedJobs + HTMLworkEmployer.replace("%data%",work.jobs[job].employer);
+	formattedJobs = formattedJobs + HTMLworkTitle.replace("%data%",work.jobs[job].title);
+	formattedJobs = formattedJobs + HTMLworkDates.replace("%data%",work.jobs[job].dates);
+	formattedJobs = formattedJobs + HTMLworkLocation.replace("%data%",work.jobs[job].location);
+	formattedJobs = formattedJobs + HTMLworkDescription.replace("%data%",work.jobs[job].description);
+	$(".work-entry:last").append(formattedJobs);
+    }
+}
+
+displayWork();
+
+$(document).click(function(loc) {
+    console.log("x location :" + loc.pageX);
+});
+
+$("#main").append(internationalizeButton);
+function inName() {
+    var name = bio.name;
+    nameParts = name.split(" ");
+    firstname = nameParts[0].slice(0,1).toUpperCase() + nameParts[0].slice(1).toLowerCase();
+    lastname = nameParts[1].toUpperCase();
+    return firstname + " " + lastname;
+}
+
+projects.display = function () {
+    for (proj in this.projects) {
+	console.log(this.projects[proj]);
+	$("#projects").append(HTMLprojectStart);
+	$(".project-entry:last").append(HTMLprojectTitle.replace("%data%",this.projects[proj].title));
+	$(".project-entry:last").append(HTMLprojectDates.replace("%data%",this.projects[proj].dates));
+	$(".project-entry:last").append(HTMLprojectDescription.replace("%data%",this.projects[proj].description));
+    }
+}
+projects.display();
+$("#mapDiv").append(googleMap);
